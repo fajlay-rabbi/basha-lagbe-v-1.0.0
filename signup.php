@@ -17,7 +17,7 @@
     
       $sql = "INSERT INTO users (name, email, password, image, type) VALUES ('$name', '$email', '$password', '', 'user')";
 
-
+       
       if (mysqli_query($con, $sql)) {
         
         echo "<script type='text/javascript'>alert('আপনার অ্যাকাউন্টটি সফলভাবে তৈরি হয়েছে।');</script>";
