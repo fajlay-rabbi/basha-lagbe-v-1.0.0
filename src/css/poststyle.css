@@ -1,0 +1,39 @@
+:root{
+
+  --primary-background: #1E1E1E;
+  --primary-color: #48E49E;
+
+  --title_font: 'li_alinur_tumatul_unicode';
+  --normal_font: 'li_sirajee_sanjar_unicode';
+
+}
+
+*,
+*::after,
+*::before,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: var(--normal_font);
+  color: white;
+  scroll-behavior: smooth;
+  background-color: var(--primary-background);
+}
+
+li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+a:hover{
+  color: black;
+}
+

@@ -1,0 +1,357 @@
+:root{
+
+  --primary-background: #1E1E1E;
+  --primary-color: #48E49E;
+
+  --title_font: 'li_alinur_tumatul_unicode';
+  --normal_font: 'li_sirajee_sanjar_unicode';
+
+}
+
+*,
+*::after,
+*::before,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: var(--normal_font);
+  scroll-behavior: smooth;
+  background-color: var(--primary-background);
+}
+
+li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+a:hover{
+  color: var(--primary-color);
+}
+
+
+
+/* ----------------------------- */
+/*          Header CSS           */
+/* ----------------------------- */
+
+
+.hero-wrapper{
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.6);
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.hero-content-wrapper{
+  height: 100%;
+}
+
+.hero-content{
+  width: 65%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-content h1{
+  font-family: var(--title_font);
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.hero-content h1 span{
+  color: var(--primary-color);
+}
+
+.hero-content p {
+  font-size: 1rem;
+  color: white;
+  text-align: justify;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.mybtn{
+  width: 130px;
+  height: 50px;
+  background-color: var(--primary-color);
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+
+/* ----------------------------- */
+/*          Navbar CSS           */
+/* ----------------------------- */
+nav{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.nav-wrapper{
+  height: 60px;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu > ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 0;
+  
+}
+
+.menu > ul > li > a{
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 25px;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu > ul > li > a:hover{
+  color: var(--primary-color);
+}
+
+
+.logo > a {
+  font-family: var(--title_font);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 3px solid white;
+  padding: 10px;
+}
+
+.post{
+  height: 50px;
+  width: 50px;
+  background-color: var(--primary-color);
+  padding: 10px;
+  color: black !important;
+  border-radius: 50px;
+  font-size: 0.9rem !important;
+  font-weight: bold !important;
+  transition: all 0.3s ease-in-out;
+}
+
+.post:hover{
+  background-color: white;
+  color: black !important;
+  border: 3px solid var(--primary-color);
+}
+
+
+
+.avatar{
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.avatar > img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+}
+
+.avatar-dropdown{
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 150px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.603);
+  border-radius: 5px;
+  display: none;
+  padding: 10px;
+  z-index: 5000000000000;
+}
+
+.show{
+  display: block;
+}
+
+.avatar-dropdown> ul{
+  margin: 0;
+  padding: 0;
+}
+
+.avatar-dropdown> ul > li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.avatar-dropdown> ul > li > a {
+  color: black;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  margin-left: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.avatar-dropdown> ul > li > a:hover{
+  color: white;
+}
+
+
+
+
+/* ----------------------------- */
+/*       Search form CSS         */
+/* ----------------------------- */
+
+.myform{
+  width: 100%;
+  height: 250px;
+  background-color: #2D2D2D !important;
+  border-radius: 10px;
+  margin-top: 5rem;
+}
+
+.myform > h1{
+  font-family: var(--title_font);
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 30px;
+}
+
+.form-content{
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.box > label{
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.box > select{
+  width: 250px;
+  height: 50px;
+  outline: none;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.search-btn{
+  width: 150px;
+  height: 50px;
+  background-color: var(--primary-color);
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 30px;
+  outline: none;
+  border: 1px solid black;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+
+
+/* ----------------------------- */
+/*       Post section CSS        */
+/* ----------------------------- */
+
+.post-container{
+  width: 100%;
+  margin-top: 50px;
+}
+
+
+.details-btn{
+  width: 150px;
+  height: 55px;
+  padding: 11px;
+  background-color: var(--primary-color);
+  color: black;
+  font-size: 0.8rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.details-btn:hover{
+  color: black;
+}
+
+/* --------- footer ------------- */
+
+.bg-foot{
+    background-color: #2D2D2D !important;
+}
+
+.myfooter{
+  border-radius: 5px;
+}
+
+
+.soc-link > ul > li > a > i{
+  color: white !important;
+}
+
+.foot {
+  color: white !important;
+  font-weight: bold;
+}
+
+
+#area{
+  height: 48px;
+}
+
+.findo:hover{
+  color: black;
+
+}
