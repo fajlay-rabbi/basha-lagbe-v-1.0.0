@@ -15,6 +15,10 @@
     <title>পোস্ট করুন</title>
 </head>
 <body>
-    <h1>Hello</h1>
+    <div class="container">
+        <div class="wrapper">
+
+        </div>
+    </div>
 </body>
 </html>
