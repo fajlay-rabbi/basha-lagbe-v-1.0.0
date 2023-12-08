@@ -43,8 +43,74 @@
 <body>
     <div class="container">
         <?php Navbar($ISLOGIN, $img) ?>
-        <div class="wrapper">
-            <p>পোস্ট করুন</p>
+
+        <div class="wrapper p-3">
+            <p class="fs-5 mb-5 fw-bold">পোস্ট করুন</p>
+
+
+            <form action="post.php" method="POST" enctype="multipart/form-data">
+
+                <div class="mb-4 in-width">
+                     <label for="distic" class="text-light">বিভাগ</label> <br />
+                        <select name="distic" id="distic" class="form-control">
+                            <option selected value="ঢাকা">ঢাকা</option>
+                            <option value="চট্টগ্রাম">চট্টগ্রাম</option>
+                            <option value="খুলনা">খুলনা</option>
+                            <option value="রাজশাহী">রাজশাহী</option>
+                            <option value="সিলেট">সিলেট</option>
+                            <option value="বরিশাল">বরিশাল</option>
+                            <option value="রংপুর">রংপুর</option>
+                            <option value="ময়মনসিংহ">ময়মনসিংহ</option>
+                        </select>
+                </div>
+
+                <div class="mb-4 in-width">
+                     <label for="type" class="text-light">রিকোয়ারমেন্ট  টাইপ</label> <br />
+                     <select name="type" id="type" class="form-control">
+                        <option value="বাসা">বাসা</option>
+                        <option value="অফিস">অফিস স্পেস</option>
+                        <option value="ব্যাচেলর - পুরুষ">ব্যাচেলর - পুরুষ</option>
+                        <option value="ব্যাচেলর - নারী">ব্যাচেলর - নারী</option>
+                     </select>
+                </div>
+
+
+                <div class="mb-4 in-width">
+                    <label for="area" class="text-light">এরিয়া</label> <br />
+                    <input type="text" name="area" id="area" class="form-control" placeholder="রামপুরা">
+                </div>
+
+
+
+
+
+
+
+
+
+
+                <div class="mb-3 in-width">
+                    <label for="title" class="form-label">টাইটেল</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="টাইটেল লিখুন">
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">বিস্তারিত</label>
+                    <textarea class="form-control" id="description" name="description" rows="3" placeholder="বিস্তারিত লিখুন"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">ছবি</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                </div>
+
+                <button type="submit" class="btn btn-primary" name="submit">পোস্ট করুন</button>
+
+
+            </form>
+
+
+
 
         </div>
     </div>

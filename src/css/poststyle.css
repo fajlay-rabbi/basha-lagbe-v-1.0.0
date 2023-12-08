@@ -44,11 +44,13 @@ a:hover{
   margin-top: 80px;
   border-radius: 5px;
   width: 100%;
-  height: 500px;
   background-color: var(--secondary-color);
 }
 
 
+.in-width{
+    width: 550px;
+}
 
 
 
