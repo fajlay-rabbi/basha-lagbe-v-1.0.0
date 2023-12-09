@@ -76,35 +76,45 @@
 
 
                 <div class="mb-4 in-width">
-                    <label for="area" class="text-light">এরিয়া</label> <br />
+                    <label for="area" class="text-light">এরিয়া / সাব এরিয়া</label> <br />
                     <input type="text" name="area" id="area" class="form-control" placeholder="রামপুরা">
                 </div>
 
 
-
-
-
-
-
-
-
-
-                <div class="mb-3 in-width">
-                    <label for="title" class="form-label">টাইটেল</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="টাইটেল লিখুন">
+                <div class="mb-4 in-width">
+                    <label for="avail" class="text-light">এভেলেবেল ফ্রম</label> <br />
+                    <input type="date" name="avail" id="avail" class="form-control">
                 </div>
 
-                <div class="mb-3">
+
+                <div class="mb-4 in-width">
+                    <label for="price" class="form-label">প্রাইস রেঞ্জ</label>
+                    <input type="text" class="form-control" id="price" name="price" placeholder="৩০০০ - ৪০০০">
+                </div>
+
+
+                <div class="mb-4 in-width">
+                    <label for="contact" class="form-label">যোগাযোগের নাম্বার</label>
+                    <input type="text" class="form-control" id="contact" name="contact" placeholder="০১৭১১১১১১১১">
+                </div>
+                
+
+
+                <div class="mb-4 in-width">
                     <label for="description" class="form-label">বিস্তারিত</label>
                     <textarea class="form-control" id="description" name="description" rows="3" placeholder="বিস্তারিত লিখুন"></textarea>
                 </div>
 
-                <div class="mb-3">
+
+                <div class="mb-5 in-width">
                     <label for="image" class="form-label">ছবি</label>
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control" id="image" name="image" multiple >
                 </div>
 
-                <button type="submit" class="btn btn-primary" name="submit">পোস্ট করুন</button>
+
+
+
+                <button type="submit" class="btn btn-success" name="submit">পোস্ট করুন</button>
 
 
             </form>
