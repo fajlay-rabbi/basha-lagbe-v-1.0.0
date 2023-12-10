@@ -33,6 +33,7 @@
 
 
 
+
 ?>
 
 
@@ -109,6 +110,8 @@
 
         <?php Navbar($ISLOGIN, $img); ?>
 
+
+
         
             <video autoplay loop muted class="bg-video">
                 <source src="./src/assets/v1.mp4" type="video/mp4">
@@ -154,7 +157,7 @@
 
 
                     <div class="box">
-                        <label for="area" class="text-light">এরিয়া</label> <br />
+                        <label for="area" class="text-light">এরিয়া / সাব এরিয়া</label> <br />
                         <input type="text" name="area" id="area" class="form-control" placeholder="রামপুরা">
                     </div>
 

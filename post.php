@@ -2,8 +2,7 @@
 
     require_once "./includes/Narvbar.php";
     require_once "./includes/Footer.php";
-
-
+    require_once "./includes/DB.Config.php";
 
     session_start();
 
@@ -14,14 +13,63 @@
 
     $ISLOGIN = true;
     $img = $_SESSION['image'];
+    
+
+    if (isset($_POST['submit'])) {
+
+        $division = $_POST['distic'];
+        $type = $_POST['type'];
+        $area = $_POST['area'];
+        $avail = $_POST['avail'];
+        $price = $_POST['price'];
+        $contact = $_POST['contact'];
+        $description = $_POST['description'];
 
 
-    // include_once "config.php";
-    // $user = $_SESSION['user'];
-    // $sql = mysqli_query($conn, "SELECT * FROM users WHERE id = {$user}");
-    // if(mysqli_num_rows($sql) > 0){
-    //     $row = mysqli_fetch_assoc($sql);
-    // }
+        $ar = [];
+
+
+        // $image = $_FILES['image']['name'];
+        // $image_tmp = $_FILES['image']['tmp_name'];
+
+
+        $uploadedFiles = $_FILES["image"];
+
+        foreach ($uploadedFiles["tmp_name"] as $key => $tmpName) {
+
+            $fileName = basename($uploadedFiles["name"][$key]);
+            // $targetPath = $targetDirectory . $fileName;
+
+            array_push($ar, $fileName);
+
+            if (move_uploaded_file($tmpName, "./uploads/{$fileName}")) {
+                echo "<script>alert('পোস্ট করা হয়েছে')</script>";
+            } else {
+                echo "<script>alert('পোস্ট করা হয়নি')</script>";
+            }
+        }
+
+
+        $str = implode(', ', $ar);
+
+        // move_uploaded_file($image_tmp, "images/$image");
+
+        $sql = "INSERT INTO `post` (`id`, `division`, `area`, `type`, `availableDate`, `price`, `number`, `description`, `image`) VALUES (NULL, '$division', '$type', '$area', '$avail', '$price', '$contact', '$description', '$str');";
+
+
+        $result = mysqli_query($con, $sql);
+
+        if ($result) {
+            header("Location: index.php");
+            exit();        
+        } else {
+            echo "<script>alert('পোস্ট করা হয়নি')</script>";
+        }
+        
+    }
+
+
+    
 
 ?>
 
@@ -31,6 +79,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./src/assets/fonts/AlinurTumatulFont/stylesheet.css">
     <link rel="stylesheet" href="./src/assets/fonts/sirajiFont/stylesheet.css">
@@ -46,7 +95,6 @@
 
         <div class="wrapper p-3">
             <p class="fs-5 mb-5 fw-bold">পোস্ট করুন</p>
-
 
             <form action="post.php" method="POST" enctype="multipart/form-data">
 
@@ -108,7 +156,7 @@
 
                 <div class="mb-5 in-width">
                     <label for="image" class="form-label">ছবি</label>
-                    <input type="file" class="form-control" id="image" name="image" multiple >
+                    <input type="file" class="form-control" id="image" name="image[]" multiple >
                 </div>
 
 

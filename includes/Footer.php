@@ -26,7 +26,7 @@ function myFooter(){
                     <div class='footer-links'>
                         <ul>
                             <li><a class='text-light fw-bold' href='./index.php'>হোম</a></li>
-                            <li><a class='text-light fw-bold' href='./about.php'>আমাদের সম্পর্কে</a></li>
+                            <li><a class='text-light fw-bold' href='./about-us.php'>আমাদের সম্পর্কে</a></li>
                             <li><a class='text-light fw-bold' href='./contact.php'>যোগাযোগ</a></li>
                             <li><a class='text-light fw-bold' href='./post.php'>পোস্ট করুন</a></li>
                         </ul>
