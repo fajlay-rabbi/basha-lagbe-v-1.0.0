@@ -52,7 +52,6 @@
 
         $str = implode(', ', $ar);
 
-        // move_uploaded_file($image_tmp, "images/$image");
 
         $sql = "INSERT INTO `post` (`id`, `division`, `area`, `type`, `availableDate`, `price`, `number`, `description`, `image`) VALUES (NULL, '$division', '$type', '$area', '$avail', '$price', '$contact', '$description', '$str');";
 

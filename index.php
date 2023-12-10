@@ -1,4 +1,9 @@
 <?php
+
+    require_once "./includes/Narvbar.php";
+    require_once "./includes/Footer.php";
+    require_once "./includes/DB.Config.php";
+
     $ISLOGIN = false;
     $img = "dp.jpg";
 
@@ -12,24 +17,12 @@
         }
     }
 
-    // $con = mysqli_connect('localhost','root','');
-    // mysqli_select_db($con,'userregistration');
-    // $s = "select * from usertable where username = '$_SESSION[username]'";
-    // $result = mysqli_query($con, $s);
-    // $num = mysqli_num_rows($result);
-    // $row = mysqli_fetch_array($result);
-    // $name = $row['name'];
-    // $email = $row['email'];
-    // $phone = $row['phone'];
-    // $username = $row['username'];
-    // $password = $row['password'];
-    // $id = $row['id'];
-    // $image = $row['image'];
-    // $image_src = "upload/".$image;
+    $sql = "SELECT * FROM `post`;";
+    $result = mysqli_query($con, $sql);
 
 
-    require_once "./includes/Narvbar.php";
-    require_once "./includes/Footer.php";
+
+
 
 
 
@@ -287,6 +280,8 @@
         </div>
 
 
+
+        <!-- Pagination -->
         <div class="container mt-5">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
