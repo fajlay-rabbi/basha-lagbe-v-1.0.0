@@ -13,21 +13,30 @@
       $name = htmlspecialchars($_POST['name']);
       $email = $_POST['email'];
       $password = htmlspecialchars($_POST['password']);
+
+      $sql = "SELECT * FROM users WHERE email = '$email'";
+      $result = mysqli_query($con, $sql);
+
+      if (mysqli_num_rows($result) > 0) {
+        echo "<script type='text/javascript'>alert('আপনার প্রবেশকৃত ইমেইলটি পূর্বে ব্যবহার করা হয়েছে।');</script>";
+      }else{
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
    
-    
-      $sql = "INSERT INTO users (name, email, password, image, type) VALUES ('$name', '$email', '$password', '', 'user')";
+        $sql = "INSERT INTO users (name, email, password, image, token, type) VALUES ('$name', '$email', '$password', '','', 'user')";
 
        
-      if (mysqli_query($con, $sql)) {
-        
-        echo "<script type='text/javascript'>alert('আপনার অ্যাকাউন্টটি সফলভাবে তৈরি হয়েছে।');</script>";
+        if (mysqli_query($con, $sql)) {
+          
+          echo "<script type='text/javascript'>alert('আপনার অ্যাকাউন্টটি সফলভাবে তৈরি হয়েছে।');</script>";
 
-        header("Location: signin.php");
-        exit();
-      }
+          header("Location: signin.php");
+          exit();
+        }
+    
       else {
-        echo "<script type='text/javascript'>alert('আপনার অ্যাকাউন্টটি তৈরি হয়নি। আবার চেষ্টা করুন।');</script>";
-      }
+          echo "<script type='text/javascript'>alert('আপনার অ্যাকাউন্টটি তৈরি হয়নি। আবার চেষ্টা করুন।');</script>";
+        }}
       
     }else {
       echo "<script type='text/javascript'>alert('আপনার প্রবেশকৃত ইমেইলটি সঠিক নয়।');</script>";

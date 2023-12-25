@@ -13,6 +13,7 @@
 
     $ISLOGIN = true;
     $img = $_SESSION['image'];
+    $user_id = $_SESSION['id'];
     
 
     if (isset($_POST['submit'])) {
@@ -24,6 +25,9 @@
         $price = $_POST['price'];
         $contact = $_POST['contact'];
         $description = $_POST['description'];
+
+        $formattedDate = date("d M Y", strtotime($avail));
+        $todayDate = date("d M Y");
 
 
         $ar = [];
@@ -43,17 +47,19 @@
             array_push($ar, $fileName);
 
             if (move_uploaded_file($tmpName, "./uploads/{$fileName}")) {
-                echo "<script>alert('পোস্ট করা হয়েছে')</script>";
+                // echo "<script>alert('পোস্ট করা হয়েছে')</script>";
             } else {
                 echo "<script>alert('পোস্ট করা হয়নি')</script>";
             }
         }
 
 
-        $str = implode(', ', $ar);
+        $str = implode(', ', $ar); 
 
 
-        $sql = "INSERT INTO `post` (`id`, `division`, `area`, `type`, `availableDate`, `price`, `number`, `description`, `image`) VALUES (NULL, '$division', '$type', '$area', '$avail', '$price', '$contact', '$description', '$str');";
+        // $sql = "INSERT INTO `post` (`id`, `division`, `area`, `type`, `availableDate`, `price`, `number`, `description`, `image`, `post_date`, `user_Id`) VALUES (NULL, '$division', '$area', '$type', '$formattedDate', '$price', '$contact', '$description', '$str', $todayDate, $user_id);";
+
+        $sql = "INSERT INTO `post` (`id`, `division`, `area`, `type`, `availableDate`, `price`, `number`, `description`, `image`, `post_date`, `user_Id`) VALUES (NULL, '$division', '$area', '$type', '$formattedDate', '$price', '$contact', '$description', '$str', '$todayDate', '$user_id');";
 
 
         $result = mysqli_query($con, $sql);
@@ -95,29 +101,33 @@
         <div class="wrapper p-3">
             <p class="fs-5 mb-5 fw-bold">পোস্ট করুন</p>
 
+            <hr>
+            
+            <div class="mt-4"></div>
+
             <form action="post.php" method="POST" enctype="multipart/form-data">
 
                 <div class="mb-4 in-width">
                      <label for="distic" class="text-light">বিভাগ</label> <br />
                         <select name="distic" id="distic" class="form-control">
-                            <option selected value="ঢাকা">ঢাকা</option>
-                            <option value="চট্টগ্রাম">চট্টগ্রাম</option>
-                            <option value="খুলনা">খুলনা</option>
-                            <option value="রাজশাহী">রাজশাহী</option>
-                            <option value="সিলেট">সিলেট</option>
-                            <option value="বরিশাল">বরিশাল</option>
-                            <option value="রংপুর">রংপুর</option>
-                            <option value="ময়মনসিংহ">ময়মনসিংহ</option>
+                            <option selected value="dhaka">ঢাকা</option>
+                            <option value="chottogram">চট্টগ্রাম</option>
+                            <option value="khulna">খুলনা</option>
+                            <option value="rajshahi">রাজশাহী</option>
+                            <option value="sylhet">সিলেট</option>
+                            <option value="barisal">বরিশাল</option>
+                            <option value="rangpur">রংপুর</option>
+                            <option value="mymensingh">ময়মনসিংহ</option>
                         </select>
                 </div>
 
                 <div class="mb-4 in-width">
                      <label for="type" class="text-light">রিকোয়ারমেন্ট  টাইপ</label> <br />
                      <select name="type" id="type" class="form-control">
-                        <option value="বাসা">বাসা</option>
-                        <option value="অফিস">অফিস স্পেস</option>
-                        <option value="ব্যাচেলর - পুরুষ">ব্যাচেলর - পুরুষ</option>
-                        <option value="ব্যাচেলর - নারী">ব্যাচেলর - নারী</option>
+                        <option value="family">ফ্যামিলি বাসা</option>
+                        <option selected value="office">অফিস স্পেস</option>
+                        <option value="men">ব্যাচেলর - পুরুষ</option>
+                        <option value="women">ব্যাচেলর - নারী</option>
                      </select>
                 </div>
 

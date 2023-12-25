@@ -295,9 +295,36 @@ nav{
   transition: all 0.3s ease-in-out;
 }
 
+.mycard-img{
+  height: 200px;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+}
 
+.filter{
+  width: 100%;
+  display: flex;
 
+}
+.tag{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10px;
+  width: 100px;
+  padding: 20px;
+  background-color: #2D2D2D;
+  border-radius: 20px;
+  margin-right: 10px;
+  color: white;
+}
 
+.clr-btn{
+  background-color: #ff4d4d !important;
+  outline: none !important;
+  border: none !important;
+}
 
 /* ----------------------------- */
 /*       Post section CSS        */

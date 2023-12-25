@@ -10,6 +10,7 @@
         exit();
     }
 
+    $id = $_SESSION['id'];
     $name = $_SESSION['name'];
     $email = $_SESSION['email'];
     
@@ -26,8 +27,25 @@
         }
     }
 
-    // Profile picture update
 
+    // fetch the user posts
+
+    $sql = "SELECT * FROM post WHERE user_id = '$id'";
+    $result = mysqli_query($con, $sql);
+    $posts = array();
+
+    while ($row = mysqli_fetch_assoc($result)) {
+            $posts[] = $row; 
+    }
+
+
+
+
+
+
+
+
+    // Profile picture update
     if(isset($_POST['profile'])){
 
         $img = $_FILES['profileImg']['name'];
@@ -57,7 +75,6 @@
 
 
     // Name update
-
     if(isset($_POST['nameUpdate'])){
 
         $name = $_POST['name'];
@@ -77,6 +94,71 @@
         }
 
     }
+
+    //password update
+    if (isset($_POST['passwordUpdate'])) {
+            
+            $password = $_POST['password'];
+            $newPassword = $_POST['newPassword'];
+    
+            $sql = "SELECT * FROM users WHERE email = '$email'";
+    
+            $result = mysqli_query($con, $sql);
+    
+            if (mysqli_num_rows($result) > 0) {
+    
+                $row = mysqli_fetch_assoc($result);
+    
+                if (password_verify($password, $row['password'])) {
+    
+                    $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+    
+                    $sql = "UPDATE users SET password = '$newPassword' WHERE email = '$email'";
+    
+                    if(mysqli_query($con, $sql)){
+                        header("Location: profile.php");
+                        exit();
+                    }else{
+                        echo "
+                            <script>
+                                alert('আপনার পাসওয়ার্ড আপডেট করা যায়নি');
+                            </script>
+                        ";
+                    }
+    
+                }else{
+                    echo "
+                        <script>
+                            alert('আপনার পুরাতন পাসওয়ার্ডটি ভুল');
+                        </script>
+                    ";
+                }
+    
+            }
+
+    }
+
+    //delete the post
+    if (isset($_GET['dlt'])) {
+        
+        $post_id = $_GET['dlt'];
+
+        $sql = "DELETE FROM post WHERE id = '$post_id' AND user_id = '$id'";
+
+        if(mysqli_query($con, $sql)){
+            header("Location: profile.php");
+            exit();
+        }else{
+            echo "
+                <script>
+                    alert('আপনার পোস্টটি মুছে ফেলা যায়নি');
+                </script>
+            ";
+        }
+
+    }
+
+
 
 
 
@@ -100,7 +182,11 @@
 
         <?php Navbar($ISLOGIN, $_SESSION['image']); ?>
 
-        <h3 class="mar-top mb-5">প্রোফাইল</h3>
+        <h3 class="mar-top mb-1">প্রোফাইল</h3>
+
+        <hr>
+
+        <div class="mb-5"></div>
 
         <form method="post"  enctype='multipart/form-data'>
             <img class="dp" required src="./uploads/<?php echo $img; ?>" alt="profile" >
@@ -132,169 +218,61 @@
             <input type="submit" name="passwordUpdate" class="btn btn-success mt-3" value="পরিবর্তন করুন">
         </form>
 
+
+    
         <div class="post-wrapper">
             <h4 class="mt-5 fw-bold mb-5">আপনার পোস্টসমূহ</h4>
+
+            <?php if($posts == null){ ?>
+                <h3 class='text-center text-light mt-5'>আপনার কোনো পোস্ট নেই।</h3>
+            <?php } else {?>
+
             <div class="container-fluid">
 
                 <div class="row mt-4">
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark">Office Space</h5>
-                                <p class="card-text text-dark">Merul Badda, Dhaka</p>
-                                <div class="d-flex justify-content-between">
 
-                                    <a href="#" class="details-btn btn-success">বিস্তারিত দেখুন</a>
+                    <?php
+                        foreach($posts as $post){
 
-                                    <a href="#" class="dlt-btn btn-danger">মুছে ফেলুন</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark">Office Space</h5>
-                                <p class="card-text text-dark">Merul Badda, Dhaka</p>
-                                <div class="d-flex justify-content-between">
+                            $type = ucwords($post['type']);
+                            $type = $type.' '."Space";
 
-                                    <a href="#" class="details-btn btn-success">বিস্তারিত দেখুন</a>
+                            $area = ucwords($post['area']);
+                            $division = ucwords($post['division']);
+                            $place = $area.', '.$division;
+                            $post_id = $post['id'];
 
-                                    <a href="#" class="dlt-btn btn-danger">মুছে ফেলুন</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark">Office Space</h5>
-                                <p class="card-text text-dark">Merul Badda, Dhaka</p>
-                                <div class="d-flex justify-content-between">
+                            $imgArray = explode(', ', $post['image']);
+                            $img = $imgArray[0];
 
-                                    <a href="#" class="details-btn btn-success">বিস্তারিত দেখুন</a>
+                           echo "<div class='col-lg-3 mt-4'>";
+                           echo "<div class='card'>";
+                           echo "<img draggable='false' src='./uploads/{$img}' class='card-img-top mycard-img' alt='room pictures'>";
+                           echo "<div class='card-body'>";
+                           echo "<h5 class='card-title text-dark'>{$type}</h5>";
+                           echo "<p class='card-text text-dark'>{$place}</p>";
+                           echo "<div class='d-flex justify-content-between'>";
 
-                                    <a href="#" class="dlt-btn btn-danger">মুছে ফেলুন</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark">Office Space</h5>
-                                <p class="card-text text-dark">Merul Badda, Dhaka</p>
-                                <div class="d-flex justify-content-between">
+                           echo "<a href='post-details.php?id=$post_id' class='details-btn btn-success'>বিস্তারিত দেখুন</a>";
 
-                                    <a href="#" class="details-btn btn-success">বিস্তারিত দেখুন</a>
+                           echo "<a href='profile.php?dlt=$post_id' class='dlt-btn btn-danger'>মুছে ফেলুন</a>";
+                           echo "</div>";
+                           echo "</div>";
+                           echo "</div>";
+                           echo "</div>";
 
-                                    <a href="#" class="dlt-btn btn-danger">মুছে ফেলুন</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            
+                        }
+                    ?>
 
                     
+
                 </div>
 
-                <div class="row mt-4">
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title">Office Space</h5>
-                                <p class="card-text">Merul Badda, Dhaka</p>
-                                <a href="#" class="details-btn">বিস্তারিত দেখুন</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title">Office Space</h5>
-                                <p class="card-text">Merul Badda, Dhaka</p>
-                                <a href="#" class="details-btn">বিস্তারিত দেখুন</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title">Office Space</h5>
-                                <p class="card-text">Merul Badda, Dhaka</p>
-                                <a href="#" class="details-btn">বিস্তারিত দেখুন</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title">Office Space</h5>
-                                <p class="card-text">Merul Badda, Dhaka</p>
-                                <a href="#" class="details-btn">বিস্তারিত দেখুন</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title">Office Space</h5>
-                                <p class="card-text">Merul Badda, Dhaka</p>
-                                <a href="#" class="details-btn">বিস্তারিত দেখুন</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title">Office Space</h5>
-                                <p class="card-text">Merul Badda, Dhaka</p>
-                                <a href="#" class="details-btn">বিস্তারিত দেখুন</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title">Office Space</h5>
-                                <p class="card-text">Merul Badda, Dhaka</p>
-                                <a href="#" class="details-btn">বিস্তারিত দেখুন</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <img draggable='false' src="./src/assets/room.jpg" class="card-img-top" alt="room pictures">
-                            <div class="card-body">
-                                <h5 class="card-title">Office Space</h5>
-                                <p class="card-text">Merul Badda, Dhaka</p>
-                                <a href="#" class="details-btn">বিস্তারিত দেখুন</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                
             </div>
+
+            <?php } ?>
+
         </div>
 
         <?php myFooter(); ?>

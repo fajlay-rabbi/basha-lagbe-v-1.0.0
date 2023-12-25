@@ -1,0 +1,97 @@
+:root{
+
+  --primary-background: #1E1E1E;
+  --primary-color: #48E49E;
+  --secondary-color: #2D2D2D;
+
+  --title_font: 'li_alinur_tumatul_unicode';
+  --normal_font: 'li_sirajee_sanjar_unicode';
+
+}
+
+*,
+*::after,
+*::before,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: var(--normal_font);
+  color: white;
+  scroll-behavior: smooth;
+  background-color: var(--primary-background);
+}
+
+li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+a:hover{
+  color: black;
+}
+
+/* ----------- Normal css ------------ */
+.wrapper{
+    background: #1E1E1E;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row{
+  width: 900px;
+  height:480px;
+  background:#2D2D2D;
+  color: white;
+
+  background-image: url("../assets/build2.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.row > form{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.row > form > input {
+  width: 40%;
+  height: 50px;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 1;
+    opacity: 0.6;
+}

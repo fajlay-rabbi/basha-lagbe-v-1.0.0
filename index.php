@@ -3,9 +3,12 @@
     require_once "./includes/Narvbar.php";
     require_once "./includes/Footer.php";
     require_once "./includes/DB.Config.php";
+    require_once "./includes/PostCard.php";
 
     $ISLOGIN = false;
     $img = "dp.jpg";
+    $isShow = false;
+
 
     session_start();
     if(!isset($_SESSION['name']) || empty($_SESSION['name'])){
@@ -17,14 +20,44 @@
         }
     }
 
-    $sql = "SELECT * FROM `post`;";
-    $result = mysqli_query($con, $sql);
+    $posts = array();
+
+    if (isset($_POST['distic'])) {
+
+        $distic = $_POST['distic'];
+        $area = $_POST['area'];
+        $type = $_POST['type'];
+
+        $isShow = true;
+
+        // $sql = "SELECT * FROM `post` WHERE `division` = '$distic' AND `area` = '$area' AND `type` = '$type';";
+
+        $sql = "SELECT * FROM `post` WHERE 
+                       LOWER(`division`) = LOWER('$distic') AND 
+                       LOWER(`area`) = LOWER('$area') AND 
+                       LOWER(`type`) = LOWER('$type');";
+
+        $result = mysqli_query($con, $sql);
 
 
+        while ($row = mysqli_fetch_assoc($result)) {
+            $posts[] = $row; 
+        }
 
+    }else{
 
+        $sql = "SELECT * FROM `post`;";
+        $result = mysqli_query($con, $sql);
 
+        while ($row = mysqli_fetch_assoc($result)) {
+            $posts[] = $row;
+        }
+    }
 
+    if (isset($_POST['clear'])) {
+        header("Location: ./index.php");
+        exit();
+    }
 
 
 ?>
@@ -129,7 +162,7 @@
 
     <main>
         <div class="container">
-            <form class="myform" id="togo">
+            <form class="myform" method="POST" id="togo">
                 <h1 class="text-light">অনুসন্ধান করুন</h1>
 
                 <div class="form-content">
@@ -137,14 +170,14 @@
                     <div class="box">
                         <label for="distic" class="text-light">বিভাগ</label> <br />
                         <select name="distic" id="distic" class="form-control">
-                            <option selected value="ঢাকা">ঢাকা</option>
-                            <option value="চট্টগ্রাম">চট্টগ্রাম</option>
-                            <option value="খুলনা">খুলনা</option>
-                            <option value="রাজশাহী">রাজশাহী</option>
-                            <option value="সিলেট">সিলেট</option>
-                            <option value="বরিশাল">বরিশাল</option>
-                            <option value="রংপুর">রংপুর</option>
-                            <option value="ময়মনসিংহ">ময়মনসিংহ</option>
+                            <option selected value="dhaka">ঢাকা</option>
+                            <option value="chottogram">চট্টগ্রাম</option>
+                            <option value="khulna">খুলনা</option>
+                            <option value="rajshahi">রাজশাহী</option>
+                            <option value="sylhet">সিলেট</option>
+                            <option value="barisal">বরিশাল</option>
+                            <option value="rangpur">রংপুর</option>
+                            <option value="mymensingh">ময়মনসিংহ</option>
                         </select>
                     </div>
 
@@ -160,14 +193,14 @@
                     <div class="box">
                         <label for="type" class="text-light">রিকোয়ারমেন্ট  টাইপ</label> <br />
                         <select name="type" id="type" class="form-control">
-                            <option value="বাসা">বাসা</option>
-                            <option value="অফিস">অফিস স্পেস</option>
-                            <option value="ব্যাচেলর - পুরুষ">ব্যাচেলর - পুরুষ</option>
-                            <option value="ব্যাচেলর - নারী">ব্যাচেলর - নারী</option>
+                            <option value="family">ফ্যামিলি বাসা</option>
+                            <option selected value="office">অফিস স্পেস</option>
+                            <option value="men">ব্যাচেলর - পুরুষ</option>
+                            <option value="women">ব্যাচেলর - নারী</option>
                         </select>
                     </div>
 
-                    <input type="submit" class="search-btn" value="সার্চ করুন" >
+                    <input type="submit" name="search" class="search-btn" value="সার্চ করুন" >
 
                 </div>
 
@@ -175,11 +208,38 @@
             </form>
         </div>
 
+        <?php if($isShow){ ?>
+            <!-- filter -->
+            <div class="container mt-5">
+                <div class="filter">
+                    <div class="tag">
+                        <?php echo ucwords($distic); ?>
+                    </div>
+                    <div class="tag">
+                        <?php echo $area; ?>
+                    </div>
+                    <div class="tag">
+                        <?php echo ucwords($type); ?>
+                    </div>
+
+                    <div>
+                        <form method="post">
+                            <div class="tag clr-btn">
+                                <i class="fa-solid fa-xmark"></i>
+                                <input  type="submit" name="clear" value="Clear" class="btn text-light">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
 
 
         <div class="container mt-5">
 
-            <div class="row mt-4">
+            <?php DisplayPostCard($posts); ?>
+
+            <!-- <div class="row mt-4">
 
                 <div class="col-lg-3">
                     <div class="card">
@@ -275,14 +335,14 @@
                 </div>
 
 
-            </div>
+            </div> -->
 
         </div>
 
 
 
         <!-- Pagination -->
-        <div class="container mt-5">
+        <!-- <div class="container mt-5">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">
@@ -299,7 +359,7 @@
                     </li>
                 </ul>
             </nav>
-        </div>
+        </div> -->
 
 
 

@@ -1,8 +1,12 @@
 :root{
+
   --primary-background: #1E1E1E;
   --primary-color: #48E49E;
+  --secondary-color: #2D2D2D;
+
   --title_font: 'li_alinur_tumatul_unicode';
   --normal_font: 'li_sirajee_sanjar_unicode';
+
 }
 
 *,
@@ -34,11 +38,22 @@ a:hover{
   color: black;
 }
 
+/* ----------- Normal css ------------ */
 
-/* ------------------------ */
+.wrapper{
+    margin-top: 80px;
+    border-radius: 5px;
+    padding: 30px;
+    width: 100%;
+    min-height: 500px;
+    background-color: var(--secondary-color);
+}
 
-.imgfile{
-    width: 250px;
+.mycard-img{
+    height: 200px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
 }
 
 .details-btn{
@@ -59,46 +74,11 @@ a:hover{
     font-size: 12px;
 }
 
-.mycard-img{
-  height: 200px;
-  width: 100%;
-  background-position: center;
-  background-size: cover;
-}
-
-/* -------------- footer ------------ */
-
-.myfooter{
-  border-radius: 5px;
-}
 
 
-.soc-link > ul > li > a > i{
-  color: white !important;
-}
-
-.foot {
-  color: white !important;
-  font-weight: bold;
-}
-
-/* ---------- */
-.mar-top{
-  margin-top: 130px;
-}
 
 
-.bg-foot{
-    background-color: #2D2D2D !important;
-}
 
-.dp{
-  width: 200px;
-  height: 200px;
-  border-radius: 5px;
-  object-fit: cover;
-  object-position: center;
-}
 
 /* ----------------------------- */
 /*          Navbar CSS           */
@@ -227,4 +207,26 @@ nav{
 
 .avatar-dropdown> ul > li > a:hover{
   color: white;
+}
+
+
+
+/* -------------- footer ------------ */
+
+.myfooter{
+  border-radius: 5px;
+}
+
+
+.soc-link > ul > li > a > i{
+  color: white !important;
+}
+
+.foot {
+  color: white !important;
+  font-weight: bold;
+}
+
+.bg-foot{
+    background-color: #2D2D2D !important;
 }

@@ -17,7 +17,7 @@
 
     $password = htmlspecialchars($_POST['password']);
 
-    $sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+    $sql = "SELECT * FROM users WHERE email='$email'";
 
     $result = mysqli_query($con, $sql);
 
@@ -26,20 +26,28 @@
 
       $row = mysqli_fetch_assoc($result);
 
-      session_start();
+      if (password_verify($password, $row['password'])) {
 
-      $_SESSION['id'] = $row['id'];
-      $_SESSION['name'] = $row['name'];
-      $_SESSION['email'] = $row['email'];
-      $_SESSION['image'] = $row['image'];
-      $_SESSION['type'] = $row['type'];
+        session_start();
+        $_SESSION['id'] = $row['id'];
+        $_SESSION['name'] = $row['name'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['image'] = $row['image'];
+        $_SESSION['type'] = $row['type'];
 
-      if ($_SESSION['type'] == 'admin') {
-        header("Location: admin.php");
+        if ($row['type'] == 'admin') {
+          header("Location: admin.php");
+        }
+        else {
+          header("Location: index.php");
+        }
+
       }
       else {
-        header("Location: index.php");
+        echo "<script type='text/javascript'>alert('আপনার পাসওয়ার্ডটি সঠিক নয়।');</script>";
       }
+
+
     }
     else {
       echo "<script type='text/javascript'>alert('আপনার পাসওয়ার্ডটি সঠিক নয়।');</script>";
@@ -61,6 +69,9 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous"
       />
+
+      <link rel="stylesheet" href="./src/assets/fonts/AlinurTumatulFont/stylesheet.css">
+      <link rel="stylesheet" href="./src/assets/fonts/sirajiFont/stylesheet.css">
 
       <title> 
         লগইন করুন
@@ -120,7 +131,7 @@
               <div class="signin">
 
                 <span class="">
-                  পাসওয়ার্ড ভুলে গিয়েছেন?<a href="resetpass.php" class="fw-bold  log">  পুনরুদ্ধার করুন</a>
+                  পাসওয়ার্ড ভুলে গিয়েছেন?<a href="forget-pass.php" class="fw-bold  log">  পুনরুদ্ধার করুন</a>
                 </span>
 
 

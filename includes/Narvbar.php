@@ -23,7 +23,7 @@ function Navbar($ISLOGIN, $img){
                     echo "<ul>";
                         echo "<li><a href='./index.php'>হোম</a></li>";
                         echo "<li><a href='./about-us.php'>আমাদের সম্পর্কে</a></li>";
-                        echo "<li><a href='./contact.php'>যোগাযোগ</a></li>";
+                        echo "<li><a href='./wishlist.php'>উইশলিস্ট</a></li>";
 
                         echo "<li><a href='./post.php' class='post'>
                             <i class='fa-solid fa-plus'></i>

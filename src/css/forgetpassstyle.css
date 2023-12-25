@@ -1,8 +1,12 @@
 :root{
+
   --primary-background: #1E1E1E;
   --primary-color: #48E49E;
+  --secondary-color: #2D2D2D;
+
   --title_font: 'li_alinur_tumatul_unicode';
   --normal_font: 'li_sirajee_sanjar_unicode';
+
 }
 
 *,
@@ -34,71 +38,68 @@ a:hover{
   color: black;
 }
 
-
-/* ------------------------ */
-
-.imgfile{
-    width: 250px;
+/* ----------- Normal css ------------ */
+.wrapper{
+    background: #1E1E1E;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.details-btn{
-    color: white !important;
-    padding: 10px 10px 10px 10px !important;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 12px;
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.dlt-btn{
-    color: white !important;
-    padding: 10px 10px 10px 10px !important;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 12px;
-}
+.row{
+  width: 900px;
+  height:480px;
+  background:#2D2D2D;
+  color: white;
 
-.mycard-img{
-  height: 200px;
-  width: 100%;
+
+
+  background-image: url("../assets/build2.jpg");
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
-/* -------------- footer ------------ */
-
-.myfooter{
-  border-radius: 5px;
+.row > form{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
 }
 
-
-.soc-link > ul > li > a > i{
-  color: white !important;
-}
-
-.foot {
-  color: white !important;
+.row > form > input {
+  width: 50%;
+  height: 50px;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 1rem;
   font-weight: bold;
 }
 
-/* ---------- */
-.mar-top{
-  margin-top: 130px;
+.overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 1;
+    opacity: 0.6;
 }
 
 
-.bg-foot{
-    background-color: #2D2D2D !important;
-}
-
-.dp{
-  width: 200px;
-  height: 200px;
-  border-radius: 5px;
-  object-fit: cover;
-  object-position: center;
-}
 
 /* ----------------------------- */
 /*          Navbar CSS           */
@@ -228,3 +229,26 @@ nav{
 .avatar-dropdown> ul > li > a:hover{
   color: white;
 }
+
+
+
+/* -------------- footer ------------ */
+
+.myfooter{
+  border-radius: 5px;
+}
+
+
+.soc-link > ul > li > a > i{
+  color: white !important;
+}
+
+.foot {
+  color: white !important;
+  font-weight: bold;
+}
+
+.bg-foot{
+    background-color: #2D2D2D !important;
+}
+
