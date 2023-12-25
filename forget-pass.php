@@ -18,7 +18,7 @@
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = 'sheikhfajlayrabbi@gmail.com';
-            $mail->Password = '';
+            $mail->Password = 'your app password';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
